@@ -1,4 +1,4 @@
-name: build and test
+name: Build Test Deploy
 
 on:
   push:
@@ -26,13 +26,3 @@ jobs:
       run: npm install
     - name: Run all tests
       run: npm test
-
-  deploy: 
-    runs-on: ubuntu-latest
-    needs: build-test
-    steps:
-      - name: Deploy to PROD
-        uses: johnbeynon/render-deploy-action@v0.0.8 #consider using pin for dependabot auto update
-        with:
-          service-id: ${{ secrets.SERVICE_ID }}
-          api-Key: ${{  secrets.GITHUB_TOKEN }}
